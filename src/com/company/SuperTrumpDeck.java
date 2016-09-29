@@ -7,7 +7,7 @@ import java.util.Random;
  * Created by jc320588 on 20/09/16.
  */
 public class SuperTrumpDeck {
-    private static final int INITIAL_NUM_CARDS = 10;
+    private static final int INITIAL_NUM_CARDS = 60;
     private ArrayList<SuperTrumpCard> cards;
 
     //// TODO: 20/09/16 List of all the cards
@@ -27,9 +27,8 @@ public class SuperTrumpDeck {
             int indx = new Random().nextInt(cards.size());
             SuperTrumpCard card = cards.remove(indx);
             retn.add(card);
-//            System.out.println("The card is " + card);
         }
-        System.out.println("Hand is " +retn);
+//        System.out.println("Hand is " +retn);
         return retn;
     }
 }

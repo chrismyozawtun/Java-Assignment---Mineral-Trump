@@ -38,8 +38,6 @@ public class Main {
                         break;
                     }
                 }
-
-
             }
         }
     }
@@ -48,6 +46,14 @@ public class Main {
         SuperTrump game = new SuperTrump(playerCount);
         game.assignPositions(playerCount);
         game.dealCards();
+        game.selectHumanPlayer();
+        //// TODO: 29/09/16 20 min into video 
+
+//
+        int getCardsofPlayer = getInt("What position do you want to cheat");
+        game.showPlayerCards(getCardsofPlayer);
+
+
 
 //        assignDealer();
     }

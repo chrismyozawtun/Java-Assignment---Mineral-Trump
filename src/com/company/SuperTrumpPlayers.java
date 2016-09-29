@@ -10,13 +10,12 @@ import java.util.ArrayList;
 public class SuperTrumpPlayers {
     private int playerCount;
     private int position;
+    private int dealerPosition = 1;
     private ArrayList<SuperTrumpCard> cards;
 
-    public SuperTrumpPlayers(int playerCount){
-        this.playerCount = playerCount;
-
+    public SuperTrumpPlayers(int position){
+        this.position = position;
     }
-
 
     public void setCards(ArrayList<SuperTrumpCard> cards) {
         this.cards = cards;
@@ -24,5 +23,22 @@ public class SuperTrumpPlayers {
 
     public void setPosition(int position){
         this.position = position;
+    }
+
+    public int getPosition(){
+        return position;
+    }
+
+    public ArrayList getCards(){
+        return cards;
+    }
+
+    public void setPlayerCount(int playerCount){
+        this.playerCount = playerCount;
+    }
+
+    public String toString(){
+        return "position = " + position;
+
     }
 }
