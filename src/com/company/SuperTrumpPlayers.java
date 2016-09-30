@@ -11,10 +11,11 @@ public class SuperTrumpPlayers {
     private int playerCount;
     private int position;
     private int dealerPosition = 1;
+    private int id;
     private ArrayList<SuperTrumpCard> cards;
 
-    public SuperTrumpPlayers(int position){
-        this.position = position;
+    public SuperTrumpPlayers(int id){
+        this.id = id;
     }
 
     public void setCards(ArrayList<SuperTrumpCard> cards) {
@@ -25,8 +26,13 @@ public class SuperTrumpPlayers {
         this.position = position;
     }
 
+
     public int getPosition(){
         return position;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public ArrayList getCards(){

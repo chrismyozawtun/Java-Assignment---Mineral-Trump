@@ -10,9 +10,6 @@ public class Main {
 
         while (menuScreen == 0) {
             int userOption = welcomeMessage();
-
-            //// TODO: 20/09/16 Switch for selection options
-
             switch (userOption) {
                 case 1: {
                     int numPlayers = getInt("How many players are playing");
@@ -21,6 +18,8 @@ public class Main {
                     }
                     menuScreen = 1;
                     startNewGame(numPlayers);
+
+
                     break;
                 }
 
@@ -44,28 +43,32 @@ public class Main {
 
     private static void startNewGame(int playerCount) {
         SuperTrump game = new SuperTrump(playerCount);
+        game.buildDeck();
         game.assignPositions(playerCount);
         game.dealCards();
         game.selectHumanPlayer();
-        //// TODO: 29/09/16 20 min into video 
+        SuperTrumpPlayers humanPlayer = game.getHumanPlayer();
+        showPlayer(humanPlayer);
+//        game.showPlayerCards(humanPlayer.getPosition());
 
-//
         int getCardsofPlayer = getInt("What position do you want to cheat");
         game.showPlayerCards(getCardsofPlayer);
 
+        game.gamePlay();
 
 
-//        assignDealer();
+//// TODO: 30/09/16 32 min
+    }
+
+    private static void showPlayer(SuperTrumpPlayers humanPlayer){
+        System.out.println("Human player " + humanPlayer);
     }
 
     private static int welcomeMessage() {
-
         System.out.println("\nMenu");
         System.out.println("1. Start game\n2. Options\n3. Exit");
         int userOption = getInt("What would you like to do?");
         return userOption;
-
-
     }
 
     private static int getInt(String inputMessage){
