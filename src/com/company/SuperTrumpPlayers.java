@@ -39,6 +39,18 @@ public class SuperTrumpPlayers {
         return cards;
     }
 
+    public void printCards(){
+        for (int i = 0; i < cards.size() ; i++) {
+            System.out.println("#" + i + " = " + String.valueOf(cards.get(i)) + " ");
+        }
+    }
+
+    public void playCard(int index){
+        SuperTrumpCard removedCard;
+        removedCard = cards.remove(index);
+//        return removedCard;
+    }
+
     public void setPlayerCount(int playerCount){
         this.playerCount = playerCount;
     }

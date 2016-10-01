@@ -47,12 +47,12 @@ public class Main {
         game.assignPositions(playerCount);
         game.dealCards();
         game.selectHumanPlayer();
-        SuperTrumpPlayers humanPlayer = game.getHumanPlayer();
-        showPlayer(humanPlayer);
+        int humanPlayer = game.getHumanPlayer();
+        showHumanPlayer(humanPlayer);
 //        game.showPlayerCards(humanPlayer.getPosition());
 
-        int getCardsofPlayer = getInt("What position do you want to cheat");
-        game.showPlayerCards(getCardsofPlayer);
+//        int getCardsofPlayer = getInt("What ID do you want to cheat");
+//        game.showPlayerCards(getCardsofPlayer);
 
         game.gamePlay();
 
@@ -60,8 +60,9 @@ public class Main {
 //// TODO: 30/09/16 32 min
     }
 
-    private static void showPlayer(SuperTrumpPlayers humanPlayer){
-        System.out.println("Human player " + humanPlayer);
+    private static void showHumanPlayer(int humanPlayer){
+//        if(humanPlayer == ) // TODO: 1/10/16 See if the human is a dealer or not
+        System.out.println("Human player is position " + humanPlayer);
     }
 
     private static int welcomeMessage() {

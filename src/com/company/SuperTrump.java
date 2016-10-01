@@ -11,6 +11,7 @@ public class SuperTrump {
     private SuperTrumpPlayers[] players;
     private SuperTrumpDeck deck;
     private int yourPlayerID;
+    private SuperTrumpTable table;
 
 
     public SuperTrump(int playerCount) {
@@ -18,12 +19,10 @@ public class SuperTrump {
         deck = new SuperTrumpDeck();
 //        new SuperTrumpCard(1);
 //        new SuperTrumpCard(1, "Slide01.jpg", "Slide01", "Play", "Quarts", "Si02", "Tectosilicate", "Hexagonal", ArrayList<String>["Igneous", "Metamorphic", "Sedunebtary"] );
-
     }
 
     public void buildDeck(){
         deck.buildDeck();
-
     }
 
     public void assignPositions(int playerCount) {
@@ -44,12 +43,6 @@ public class SuperTrump {
     }
 
     public void dealCards() {
-//        players = new SuperTrumpPlayers[playerCount];
-//        for (int i = 0; i < playerCount ; i++) {
-//            players[i] = new SuperTrumpPlayers(i);
-
-//            System.out.println("dealing cards bit " + players[i].getId());
-//        }
         for (SuperTrumpPlayers player : players) {
             ArrayList<SuperTrumpCard> cards = deck.dealCards(DEAL_AMOUNT);
             player.setCards(cards);
@@ -57,80 +50,75 @@ public class SuperTrump {
         }
     }
 
-    public void showPlayerCards(int position) {
-        System.out.println("Player " + players[position] + " cards are " + players[position].getCards());
+    public void showPlayerCards(int id) {
+        System.out.println("Player " + players[id] + " cards are " + players[id].getCards());
     }
 
     public void selectHumanPlayer() {
-//// TODO: 30/09/16 random human player 
         yourPlayerID = new Random().nextInt(playerCount);
     }
-    public SuperTrumpPlayers getHumanPlayer() {
-        return players[yourPlayerID];
+
+    public int getHumanPlayer() {
+        return players[yourPlayerID].getPosition();
+//// TODO: 1/10/16 Fix human player postion/id saying
     }
 
     public void gamePlay(){
         boolean playGame = true;
-        int positionsPlay;
         int positionsToPlay = 2;
-        int playerList = 0;
+        int playerID = 0;
+        int playerlistLimit = playerCount - 1;
+
         ArrayList<Integer> playOrder = new ArrayList<>();
         for (int i = 1; i < playerCount + 1; i++) {
             playOrder.add(i);
             System.out.println("play order = " + i);
         }
-        positionsPlay = playOrder.size() +1;
 
         while (playGame == true){
 //            for (int i : playOrder){
-            if (players[playerList].getPosition() == positionsToPlay){
+            if (players[playerID].getPosition() == positionsToPlay){
                 int number;
                 Scanner input = new Scanner(System.in);
-                System.out.println("position = " + players[playerList].getPosition() + " id = " + players[playerList].getId() + " cards = " + players[playerList].getCards());
-//                    playerList = 0;
-                System.out.println("enter a card you wanna eat");
-                number = input.nextInt();
-                System.out.println(number + " was inputted");
-//                    playerList = 0;
+                if (yourPlayerID == players[playerID].getPosition()) {
+                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+                    players[playerID].printCards();
+                    System.out.println("enter a card you wanna eat");
+                    number = input.nextInt();
+                    System.out.println(number + " was inputted");
+                    players[playerID].playCard(number);
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+                else {
+                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+                }
+
                 positionsToPlay++;
             }
 
             if (positionsToPlay > playerCount){
                 positionsToPlay = 1;
             }
-
-            if (playerList > (playerCount-1)){
-                playerList = 0;
+            if (playerID < playerlistLimit){
+                playerID++;
             }
             else {
-                playerList++;
+                playerID = 0;
             }
         }
     }
 }
-
-
-
-//            }
-
-
-//            for (int i = 1; i < positionsPlay; i++) {
-//                if (players[i].getPosition() == positionsToPlay){
-//                    int number;
-//                    Scanner input = new Scanner(System.in);
-//                    System.out.println("position = " + players[i].getPosition() + " id = " + players[i].getId() + " cards = " + players[i].getCards());
-//                    System.out.println("enter a card you wanna eat");
-//                    number = input.nextInt();
-//                    System.out.println(number + " was inputted");
-//                    positionsToPlay++;
-//                }
-//            }
-
-//    public void showPlayerCards(int position) {
-//        System.out.println(players[3]);;
-//
-//    }
-
 
 
 
