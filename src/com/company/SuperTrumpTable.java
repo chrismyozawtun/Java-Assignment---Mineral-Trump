@@ -16,20 +16,19 @@ public class SuperTrumpTable {
 
     public void addCard(SuperTrumpCard tableCard) {
         table.add(tableCard);
-        System.out.println(table);
+        System.out.println("table cards: " + table);
 
 //        return null;
     }
 
-    public void cardInPlay() {
+    public SuperTrumpCard cardInPlay() {
 //        Element cardToShow = table.size() - 1;
         switch (table.size()) {
             case 0: {
-                break;
+                return null;
             }
             default: {
-                System.out.println("The card on the table is " + table.get(table.size() - 1));
-                break;
+                return table.get(table.size() - 1);
             }
         }
     }

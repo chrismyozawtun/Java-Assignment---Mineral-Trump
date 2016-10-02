@@ -14,6 +14,10 @@ public class SuperTrumpCard {
     public SuperTrumpCard(int id){
         this.id = id;
     }
+
+    public int getID(){
+        return id;
+    }
 //, String fileName, String imageName, String cartType, String tittle, String chemistry, String classification, String cyrstalSystem, ArrayList occurence, int hardness, int specificGravity, String Cleavage, String crustalAbundance, String economicValue
 
     public String toString(){

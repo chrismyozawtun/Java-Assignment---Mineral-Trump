@@ -65,7 +65,6 @@ public class SuperTrump {
 
     public int getHumanPlayer() {
         return players[humanPlayerID].getPosition();
-//// TODO: 1/10/16 Fix human player postion/id saying
     }
 
     public void gamePlay(){
@@ -87,7 +86,7 @@ public class SuperTrump {
                 int number;
                 Scanner input = new Scanner(System.in);
                 if (players[humanPlayerID].getPosition() == players[playerID].getPosition()) {
-                                                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+                    System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
                     players[playerID].printCardsforPlay();
                     System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
                     number = input.nextInt();
@@ -106,19 +105,53 @@ public class SuperTrump {
                     }
                 }
                 else {
+//                    for (int i = 0; i < players[playerID].getCards().size(); i++) {
+//                        try {
+//                            if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
+//                                System.out.println("Player" + players[playerID].getPosition() + " played card " + players[playerID].getCards().get(i));
+//                                table.addCard(players[playerID].playCard(i));
+//                                break;
+//                            } else {
+//                                players[playerID].drawCard(deck.getOneCard());
+//                                break;
+//                            }
+//                        }
+//                        catch (NullPointerException e){
+//                            System.out.println(players[playerID].getId() + " " +players[playerID].getPosition() +  " there isn\'t a card");
+//                        }
+//                    }
+                    System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+
                     for (int i = 0; i < players[playerID].getCards().size(); i++) {
+                        try {
+                            if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
+                                table.addCard(players[playerID].playCard(i));
+                                break;
+                            }
+                            else {
+                                players[playerID].drawCard(deck.getOneCard());
+                            }
+                            break;
+                        }
+                        catch (NullPointerException e){
+                            randomCardAI = new Random().nextInt(players[playerID].getCards().size());
+                            System.out.println("Player " + players[playerID].getPosition() + " played card "  + players[playerID].getCards().get(randomCardAI));
+                            table.addCard(players[playerID].playCard(randomCardAI));
+//                            System.out.println("There is no card in play\n");
+                            break;
+                        }
 
                     }
 
 
-                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
 
-                    randomCardAI = new Random().nextInt(players[playerID].getCards().size());
-                    System.out.println("Player " + players[playerID].getPosition() + " played card "  + players[playerID].getCards().get(randomCardAI));
-                    table.addCard(players[playerID].playCard(randomCardAI));
+//                    randomCardAI = new Random().nextInt(players[playerID].getCards().size());
+//                    System.out.println("Player " + players[playerID].getPosition() + " played card "  + players[playerID].getCards().get(randomCardAI));
+//                    table.addCard(players[playerID].playCard(randomCardAI));
                 }
                 positionsToPlay++;
-                table.cardInPlay();
+                System.out.println("The card in play is " + table.cardInPlay());
+//// TODO: 3/10/16 Skip function
             }
             if (positionsToPlay > playerCount){
                 positionsToPlay = 1;

@@ -31,6 +31,7 @@ public class SuperTrumpPlayers {
 
     public void drawCard(SuperTrumpCard drewCard){
         cards.add(drewCard);
+        System.out.println("Player drew a card");
         skipTurn = true;
     }
 
@@ -44,6 +45,10 @@ public class SuperTrumpPlayers {
 
     public ArrayList getCards(){
         return cards;
+    }
+
+    public SuperTrumpCard getOneCard(int index){
+        return cards.get(index);
     }
 
     public boolean getSkip(){
