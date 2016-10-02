@@ -81,6 +81,7 @@ public class SuperTrump {
         }
 
         System.out.println("\nLeft of the dealer (Position 2) goes first." );
+//        // TODO: 3/10/16 Do a giant try and catch exception? for when someone looses all their cards. Catch that error and playgame is false?
         while (playGame){
             if (players[playerID].getPosition() == positionsToPlay){
                 int number;
@@ -105,21 +106,6 @@ public class SuperTrump {
                     }
                 }
                 else {
-//                    for (int i = 0; i < players[playerID].getCards().size(); i++) {
-//                        try {
-//                            if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
-//                                System.out.println("Player" + players[playerID].getPosition() + " played card " + players[playerID].getCards().get(i));
-//                                table.addCard(players[playerID].playCard(i));
-//                                break;
-//                            } else {
-//                                players[playerID].drawCard(deck.getOneCard());
-//                                break;
-//                            }
-//                        }
-//                        catch (NullPointerException e){
-//                            System.out.println(players[playerID].getId() + " " +players[playerID].getPosition() +  " there isn\'t a card");
-//                        }
-//                    }
                     System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
 
                     for (int i = 0; i < players[playerID].getCards().size(); i++) {
@@ -151,7 +137,12 @@ public class SuperTrump {
                 }
                 positionsToPlay++;
                 System.out.println("The card in play is " + table.cardInPlay());
-//// TODO: 3/10/16 Skip function
+//// TODO: 3/10/16 Skip function. try making a variable that counts skips/draws. And then make a limimt variable which is just LIMIT_SKIPS = playercount - 1.
+// todo: The first variable will increase everyime the draw function is called and then every loop of the game; the draw function is check with the limit and if the limit is reached,
+//todo: Apparently the last player gets to choose the next trump category
+//todo: To check if players can play; just at the start before each if or loop check if its true with players[playerID].getSkip
+
+//todo: do a loop so all the players Skip boolean is taken back to false and they can play again??
             }
             if (positionsToPlay > playerCount){
                 positionsToPlay = 1;
