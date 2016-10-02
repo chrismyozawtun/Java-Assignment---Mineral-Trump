@@ -21,10 +21,10 @@ public class SuperTrumpDeck {
     //// TODO: 20/09/16 List of all the cards
 
     public SuperTrumpDeck(){
-        cards = new ArrayList<SuperTrumpCard>();
+        cards = new ArrayList<>();
 
         for (int i = 0; i < INITIAL_NUM_CARDS; i++) {
-             cards.add(new SuperTrumpCard(i));
+            cards.add(new SuperTrumpCard(i));
             //google how to create random array of integers. Non repeating integers
         }
     }
@@ -40,25 +40,24 @@ public class SuperTrumpDeck {
 //            doc.getDocumentElement().normalize();
 //
 //            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-//
 //            NodeList nList = doc.getElementsByTagName("cards");
-//
 //            System.out.println("----------------------------");
 //
 //            for (int temp = 0; temp < nList.getLength(); temp++) {
-//
 //                Node nNode = nList.item(temp);
-//
 //                System.out.println("\nCurrent Element :" + nNode.getNodeName());
-//
 //                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//
 //                }
 //            }
 //        }
 //        catch (Exception e) {
 //            e.printStackTrace();
 //        }}
+    }
+
+    public SuperTrumpCard getOneCard(){
+        int indx = new Random().nextInt(cards.size());
+        return(cards.remove(indx));
     }
 
     public ArrayList<SuperTrumpCard> dealCards(int numCards) {
@@ -69,7 +68,8 @@ public class SuperTrumpDeck {
             SuperTrumpCard card = cards.remove(indx);
             retn.add(card);
         }
-//        System.out.println("Hand is " +retn);
         return retn;
     }
 }
+
+

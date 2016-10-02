@@ -13,6 +13,9 @@ public class SuperTrumpPlayers {
     private int dealerPosition = 1;
     private int id;
     private ArrayList<SuperTrumpCard> cards;
+    private boolean skipTurn = false;
+    
+//    // TODO: 3/10/16 Skip turn if draw card 
 
     public SuperTrumpPlayers(int id){
         this.id = id;
@@ -26,6 +29,10 @@ public class SuperTrumpPlayers {
         this.position = position;
     }
 
+    public void drawCard(SuperTrumpCard drewCard){
+        cards.add(drewCard);
+        skipTurn = true;
+    }
 
     public int getPosition(){
         return position;
@@ -39,16 +46,27 @@ public class SuperTrumpPlayers {
         return cards;
     }
 
+    public boolean getSkip(){
+        return skipTurn;
+    }
+
     public void printCards(){
         for (int i = 0; i < cards.size() ; i++) {
             System.out.println("#" + i + " = " + String.valueOf(cards.get(i)) + " ");
         }
     }
 
-    public void playCard(int index){
+    public void printCardsforPlay(){
+        System.out.println("You are position " + position + " and ID is " + id + "\nYour hand is: ");
+        for (int i = 0; i < cards.size() ; i++) {
+            System.out.println("#" + i + " = " + String.valueOf(cards.get(i)));
+        }
+    }
+
+    public SuperTrumpCard playCard(int index){
         SuperTrumpCard removedCard;
         removedCard = cards.remove(index);
-//        return removedCard;
+        return removedCard;
     }
 
     public void setPlayerCount(int playerCount){

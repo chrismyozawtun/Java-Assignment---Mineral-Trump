@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        int menuScreen = 0;
+        boolean menuScreen = true;
         System.out.println("Welcome to Super Trumps: The Mineral Card Game");
-
-        while (menuScreen == 0) {
+        while (menuScreen) {
             int userOption = welcomeMessage();
             switch (userOption) {
                 case 1: {
@@ -16,13 +15,10 @@ public class Main {
                     while (numPlayers > 10 || numPlayers == 0) {
                         numPlayers = getInt("How many players are playing. (Max 10)");
                     }
-                    menuScreen = 1;
+                    menuScreen = false;
                     startNewGame(numPlayers);
-
-
                     break;
                 }
-
                 case 2: {
                     System.out.println("The options don't work yet");
                     break;
@@ -55,18 +51,20 @@ public class Main {
 //        game.showPlayerCards(getCardsofPlayer);
 
         game.gamePlay();
-
-
-//// TODO: 30/09/16 32 min
     }
 
     private static void showHumanPlayer(int humanPlayer){
 //        if(humanPlayer == ) // TODO: 1/10/16 See if the human is a dealer or not
-        System.out.println("Human player is position " + humanPlayer);
+        if (humanPlayer == 1){
+            System.out.println("You are in position " + humanPlayer + " and you are also the dealer.");
+        }
+        else  {
+            System.out.println("You are in position " + humanPlayer + ".");
+        }
     }
 
     private static int welcomeMessage() {
-        System.out.println("\nMenu");
+        System.out.println("Menu");
         System.out.println("1. Start game\n2. Options\n3. Exit");
         int userOption = getInt("What would you like to do?");
         return userOption;

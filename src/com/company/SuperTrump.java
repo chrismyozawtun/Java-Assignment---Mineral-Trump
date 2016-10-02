@@ -1,24 +1,23 @@
 package com.company;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static sun.audio.AudioPlayer.player;
 
 public class SuperTrump {
     private int playerCount;
     private static final int DEAL_AMOUNT = 8;
-
     private SuperTrumpPlayers[] players;
     private SuperTrumpDeck deck;
-    private int yourPlayerID;
     private SuperTrumpTable table;
+    private int humanPlayerID;
 
 
     public SuperTrump(int playerCount) {
         this.playerCount = playerCount;
         deck = new SuperTrumpDeck();
-//        new SuperTrumpCard(1);
-//        new SuperTrumpCard(1, "Slide01.jpg", "Slide01", "Play", "Quarts", "Si02", "Tectosilicate", "Hexagonal", ArrayList<String>["Igneous", "Metamorphic", "Sedunebtary"] );
+        table = new SuperTrumpTable();
     }
 
     public void buildDeck(){
@@ -31,9 +30,9 @@ public class SuperTrump {
             playerPositions.add(i);
         }
         Collections.shuffle(playerPositions);
-        for (int i = 0; i < playerCount; i++) {
-            System.out.println(playerPositions.get(i));
-        }
+//                                                    for (int i = 0; i < playerCount; i++) {
+//                                                        System.out.println(playerPositions.get(i));
+//                                                    }
 
         players = new SuperTrumpPlayers[playerCount];
         for (int i = 0; i < playerCount ; i++) {
@@ -46,7 +45,12 @@ public class SuperTrump {
         for (SuperTrumpPlayers player : players) {
             ArrayList<SuperTrumpCard> cards = deck.dealCards(DEAL_AMOUNT);
             player.setCards(cards);
-            System.out.println("id = " + player.getId() + " Player position " + player.getPosition() + " hand is " + cards);
+//                                                    System.out.println("id = " + player.getId() + " Player position " + player.getPosition() + " hand is " + cards);
+        }
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].getPosition() == 1){
+                System.out.println("\nCards have been dealt by player " + players[i].getId() + " in position " + players[i].getPosition() + ".");
+            }
         }
     }
 
@@ -54,12 +58,13 @@ public class SuperTrump {
         System.out.println("Player " + players[id] + " cards are " + players[id].getCards());
     }
 
-    public void selectHumanPlayer() {
-        yourPlayerID = new Random().nextInt(playerCount);
+    public int selectHumanPlayer() {
+        humanPlayerID = new Random().nextInt(playerCount);
+        return humanPlayerID;
     }
 
     public int getHumanPlayer() {
-        return players[yourPlayerID].getPosition();
+        return players[humanPlayerID].getPosition();
 //// TODO: 1/10/16 Fix human player postion/id saying
     }
 
@@ -68,45 +73,53 @@ public class SuperTrump {
         int positionsToPlay = 2;
         int playerID = 0;
         int playerlistLimit = playerCount - 1;
+        int randomCardAI;
 
         ArrayList<Integer> playOrder = new ArrayList<>();
         for (int i = 1; i < playerCount + 1; i++) {
             playOrder.add(i);
-            System.out.println("play order = " + i);
+//                                                    System.out.println("play order = " + i);
         }
 
-        while (playGame == true){
-//            for (int i : playOrder){
+        System.out.println("\nLeft of the dealer (Position 2) goes first." );
+        while (playGame){
             if (players[playerID].getPosition() == positionsToPlay){
                 int number;
                 Scanner input = new Scanner(System.in);
-                if (yourPlayerID == players[playerID].getPosition()) {
-                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-                    players[playerID].printCards();
-                    System.out.println("enter a card you wanna eat");
+                if (players[humanPlayerID].getPosition() == players[playerID].getPosition()) {
+                                                    System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+                    players[playerID].printCardsforPlay();
+                    System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
                     number = input.nextInt();
-                    System.out.println(number + " was inputted");
-                    players[playerID].playCard(number);
-
-
-
-
-
-
-
-
-
-
-
-
+//                                                    System.out.println(number + " was inputted");
+                    switch (number) {
+                        case 40: {
+                            players[playerID].drawCard(deck.getOneCard());
+                            break;
+                        }
+                        default: {
+                            table.addCard(players[playerID].playCard(number));
+                            break;
+////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
+////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
+                        }
+                    }
                 }
                 else {
+                    for (int i = 0; i < players[playerID].getCards().size(); i++) {
+
+                    }
+
+
                     System.out.println("position = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+
+                    randomCardAI = new Random().nextInt(players[playerID].getCards().size());
+                    System.out.println("Player " + players[playerID].getPosition() + " played card "  + players[playerID].getCards().get(randomCardAI));
+                    table.addCard(players[playerID].playCard(randomCardAI));
                 }
-
                 positionsToPlay++;
+                table.cardInPlay();
             }
-
             if (positionsToPlay > playerCount){
                 positionsToPlay = 1;
             }
@@ -119,6 +132,3 @@ public class SuperTrump {
         }
     }
 }
-
-
-
