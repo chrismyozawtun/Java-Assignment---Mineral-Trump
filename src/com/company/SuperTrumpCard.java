@@ -41,8 +41,6 @@ private String economic_value;
 
     }
 
-
-
     public int getID(){
         return id;
     }

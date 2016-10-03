@@ -18,8 +18,6 @@ public class SuperTrumpDeck {
     private static final int INITIAL_NUM_CARDS = 60;
     private ArrayList<SuperTrumpCard> cards;
 
-    //// TODO: 20/09/16 List of all the cards
-
     public SuperTrumpDeck(){
         cards = new ArrayList<>();
         cards.add(new SuperTrumpCard(1, "Slide01.jpg","Slide01","play","Quartz",        "SiO_2",                                     "tectosilicate",    "hexagonal",    "7",          "2.65",       "poor/none",            "high",         "moderate", "igneous, metamorphic, sedimentary", null));
@@ -82,8 +80,6 @@ public class SuperTrumpDeck {
         cards.add(new SuperTrumpCard(58,"Slide58.jpg","Slide58","trump", "The Mineralogist", null,null, null, null, null, null, null , null , null, "Cleavage"));
         cards.add(new SuperTrumpCard(59,"Slide59.jpg","Slide59","trump", "The Geophysicist", null,null, null, null, null, null, null , null , null, "Specific Gravity"));
         cards.add(new SuperTrumpCard(60,"Slide60.jpg","Slide60","trump", "The Geologist", null,null, null, null, null, null, null , null , null,"Change to trumps category of your choice"));
-            //google how to create random array of integers. Non repeating integers
-//        }
     }
 
     public ArrayList getCards(){
@@ -91,7 +87,6 @@ public class SuperTrumpDeck {
     }
 
     public void buildDeck() {
-
     }
 
     public SuperTrumpCard getOneCard(){

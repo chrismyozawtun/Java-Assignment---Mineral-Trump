@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class SuperTrumpTable {
 
     private ArrayList<SuperTrumpCard> table;
+    private String trump;
 
     protected SuperTrumpTable(){
         table = new ArrayList<>();
@@ -20,6 +21,15 @@ public class SuperTrumpTable {
 
 //        return null;
     }
+
+    public void setTrump(String trump){
+        this.trump = trump;
+    }
+
+    public String getTrump(){
+        return trump;
+    }
+
 
     public ArrayList<SuperTrumpCard> getTableCards(){
         return table;

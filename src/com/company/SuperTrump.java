@@ -11,13 +11,37 @@ public class SuperTrump {
     private int humanPlayerID;
     private int skipLIMIT;
     private int numberOfSkips;
+    private ArrayList<Integer> abundanceEconomicScoring;
+    private ArrayList<String> abundanceTypes;
+    private ArrayList<String> economicTypes;
+    private ArrayList<Integer> cleavageScoring;
+    private ArrayList<String> cleavageTypes;
 
 
     public SuperTrump(int playerCount) {
         this.playerCount = playerCount;
         deck = new SuperTrumpDeck();
         table = new SuperTrumpTable();
+        buildScoreSheet();
     }
+
+    private void buildScoreSheet() {
+        abundanceEconomicScoring = new ArrayList<>();
+        cleavageTypes = new ArrayList<>(Arrays.asList("none", "noor/none", "1 poor", "2 poor", "1 good", "1 good, 1 poor", "2 good", "3 good", "1 perfect", "1 perfect, 1 good", "1 perfect, 2 good", "2 perfect, 1 good", "3 perfect", "4 perfecct","6 perfect"));
+        cleavageScoring = new ArrayList<>(Arrays.asList(-1,0,1,2,3,4,6,9,10,13,16,23,30,40,60));
+        abundanceTypes = new ArrayList<>(Arrays.asList("ultratrace", "trace", "low", "moderate", "high", "very high"));
+        economicTypes = new ArrayList<>(Arrays.asList("trivial", "low", "moderate", "high", "very high", "I'm rich!"));
+
+        for (int i = 1; i < 7; i++) {
+            abundanceEconomicScoring.add(i);
+        }
+        System.out.println(abundanceEconomicScoring.toString());
+        System.out.println(cleavageScoring);
+        System.out.println(cleavageTypes);
+        System.out.println(abundanceTypes);
+        System.out.println(economicTypes);
+    }
+
 
     public void buildDeck() {
         deck.buildDeck();
@@ -29,9 +53,6 @@ public class SuperTrump {
             playerPositions.add(i);
         }
         Collections.shuffle(playerPositions);
-//                                                    for (int i = 0; i < playerCount; i++) {
-//                                                        System.out.println(playerPositions.get(i));
-//                                                    }
 
         players = new SuperTrumpPlayers[playerCount];
         for (int i = 0; i < playerCount; i++) {
@@ -40,13 +61,13 @@ public class SuperTrump {
         }
 
         skipLIMIT = playerCount - 1;
+//        System.out.printf(Arrays.toString(abundanceEconomicScoring) + " " + Arrays.toString(cleavageScoring) + " " + Arrays.toString(cleavageTypes));
     }
 
     public void dealCards() {
         for (SuperTrumpPlayers player : players) {
             ArrayList<SuperTrumpCard> cards = deck.dealCards(DEAL_AMOUNT);
             player.setCards(cards);
-//                                                    System.out.println("id = " + player.getId() + " Player position " + player.getPosition() + " hand is " + cards);
         }
         for (int i = 0; i < players.length; i++) {
             if (players[i].getPosition() == 1) {
@@ -85,6 +106,7 @@ public class SuperTrump {
 //        // TODO: 3/10/16 Do a giant try and catch exception? for when someone looses all their cards. Catch that error and playgame is false?
 
         while (playGame) {
+            table.setTrump("cleavage");
 //            if (!players[playerID].getSkip()) { // TODO: 3/10/16 DO the skip function in ful so it works
             if (players[playerID].getPosition() == positionsToPlay) {
                 if (players[humanPlayerID].getPosition() == players[playerID].getPosition()) {
@@ -103,15 +125,20 @@ public class SuperTrump {
                             break;
                         }
                         default: {
-                            table.addCard(players[playerID].playCard(number));
-                            break;
+                            if (checkCard(playerID, number)){
+                                table.addCard(players[playerID].playCard(number));
+                                break;
+                            }
+
+
+//                            break;
 ////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
 ////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
                         }
                     }
                 } else {
                     System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-
+//// TODO: 4/10/16 check all the cards in the hand
                     for (int i = 0; i < players[playerID].getCards().size(); i++) {
                         try {
                             if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
@@ -138,7 +165,7 @@ public class SuperTrump {
                 System.out.println("The deck has " + deck.getCards().size() + " cards left");
             }
 
-            if (deck.getCards().size() == 1){
+            if (deck.getCards().size() == 1) {
                 deck.shuffleInTableCards(table.getTableCards());
                 System.out.println("The table cards have been shuffled back into the deck");
             }
@@ -152,6 +179,67 @@ public class SuperTrump {
                 playerID = 0;
             }
         }
+    }
+
+    private boolean checkCard(int playerID, int index) {
+        try {
+            int score = 0;
+            int tableScore = 0;
+            switch (table.getTrump()) {
+                case "cleavage": {
+                    String rankingCard = this.players[playerID].getOneCard(index).getCleavage();
+                    String tableCard = this.table.cardInPlay().getCleavage();
+
+                    int scoreIndex = cleavageTypes.indexOf(rankingCard);
+                    score = cleavageScoring.get(scoreIndex);
+                    System.out.println("Your cards score is: " + score);
+
+                    int tableIndex = cleavageTypes.indexOf(tableCard);
+                    tableScore = cleavageScoring.get(tableIndex);
+                    System.out.println("The table cards score is: " + tableScore);
+
+//                return score > tableScore;
+                break;
+                }
+
+                case "crustal abundance": {
+                    String rankingCard = this.players[playerID].getOneCard(index).getCrustal_abundance();
+                    String tableCard = this.table.cardInPlay().getCrustal_abundance();
+
+                    int scoreIndex = cleavageTypes.indexOf(rankingCard);
+                    score = abundanceEconomicScoring.get(scoreIndex);
+                    System.out.println("Your cards score is: " + score);
+
+                    int tableIndex = cleavageTypes.indexOf(tableCard);
+                    tableScore = abundanceEconomicScoring.get(tableIndex);
+                    System.out.println("The table cards score is: " + tableScore);
+//                return score > tableScore;
+                break;
+                }
+
+                case "economic value": {
+                    String rankingCard = this.players[playerID].getOneCard(index).getEconomic_value();
+                    String tableCard = this.table.cardInPlay().getEconomic_value();
+
+                    int scoreIndex = cleavageTypes.indexOf(rankingCard);
+                    score = abundanceEconomicScoring.get(scoreIndex);
+                    System.out.println("Your cards score is: " + score);
+
+                    int tableIndex = cleavageTypes.indexOf(tableCard);
+                    tableScore = abundanceEconomicScoring.get(tableIndex);
+                    System.out.println("The table cards score is: " + tableScore);
+//                return score > tableScore;
+                break;
+
+                }
+            }
+            return score > tableScore;
+
+        }
+        catch (NullPointerException e){
+            return true;
+        }
+
     }
 }
 //// TODO: 3/10/16 Skip function. try making a variable that counts skips/draws. And then make a limimt variable which is just LIMIT_SKIPS = playercount - 1.
