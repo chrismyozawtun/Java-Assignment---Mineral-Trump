@@ -8,14 +8,11 @@ import java.util.ArrayList;
 public class SuperTrumpPlayers {
     private int playerCount;
     private int position;
-//    private int dealerPosition = 1;
     private int id;
     private ArrayList<SuperTrumpCard> cards;
     private boolean skipTurn = false;
-    
-//    // TODO: 3/10/16 Skip turn if draw card 
 
-    public SuperTrumpPlayers(int id){
+    public SuperTrumpPlayers(int id) {
         this.id = id;
     }
 
@@ -23,61 +20,51 @@ public class SuperTrumpPlayers {
         this.cards = cards;
     }
 
-    public void setPosition(int position){
+    public void setPosition(int position) {
         this.position = position;
     }
 
-    public void drawCard(SuperTrumpCard drewCard){
+    public void drawCard(SuperTrumpCard drewCard) {
         cards.add(drewCard);
         System.out.println("Player drew a card");
         skipTurn = true;
     }
 
-    public int getPosition(){
+    public int getPosition() {
         return position;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public ArrayList getCards(){
+    public ArrayList getCards() {
         return cards;
     }
 
-    public SuperTrumpCard getOneCard(int index){
+    public SuperTrumpCard getOneCard(int index) {
         return cards.get(index);
     }
 
-    public boolean getSkip(){
+    public boolean getSkip() {
         return skipTurn;
     }
 
-    public void printCards(){
-        for (int i = 0; i < cards.size() ; i++) {
-            System.out.println("#" + i + " = " + String.valueOf(cards.get(i)) + " ");
-        }
-    }
-
-    public void printCardsforPlay(){
+    public void printCardsforPlay() {
         System.out.println("You are position " + position + " and ID is " + id + "\nYour hand is: ");
-        for (int i = 0; i < cards.size() ; i++) {
+        for (int i = 0; i < cards.size(); i++) {
             System.out.println("#" + i + " = " + String.valueOf(cards.get(i)) + "   Hardness: " + cards.get(i).getHardness() + " Specific gravity: " + cards.get(i).getSpecifc_gravity() + " Cleavage: " + cards.get(i).getCleavage() + " Crustal Abundance: " + cards.get(i).getCrustal_abundance() + " Economic value: " + cards.get(i).getEconomic_value());
         }
     }
 
-    public SuperTrumpCard playCard(int index){
+    public SuperTrumpCard playCard(int index) {
         SuperTrumpCard removedCard;
         System.out.println("The card is: " + cards.get(index).gettittle());
         removedCard = cards.remove(index);
         return removedCard;
     }
 
-    public void setPlayerCount(int playerCount){
-        this.playerCount = playerCount;
-    }
-
-    public String toString(){
+    public String toString() {
         return "position = " + position;
 
     }

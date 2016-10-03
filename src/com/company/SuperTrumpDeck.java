@@ -86,16 +86,12 @@ public class SuperTrumpDeck {
         return cards;
     }
 
-    public void buildDeck() {
-    }
-
     public SuperTrumpCard getOneCard(){
         int indx = new Random().nextInt(cards.size());
         return(cards.remove(indx));
     }
 
     public ArrayList<SuperTrumpCard> dealCards(int numCards) {
-
         ArrayList<SuperTrumpCard> retn = new ArrayList<SuperTrumpCard>();
         for (int i = 0; i < numCards; i++){
             int indx = new Random().nextInt(cards.size());

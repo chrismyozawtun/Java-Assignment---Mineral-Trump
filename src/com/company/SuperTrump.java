@@ -27,24 +27,14 @@ public class SuperTrump {
 
     private void buildScoreSheet() {
         abundanceEconomicScoring = new ArrayList<>();
-        cleavageTypes = new ArrayList<>(Arrays.asList("none", "noor/none", "1 poor", "2 poor", "1 good", "1 good, 1 poor", "2 good", "3 good", "1 perfect", "1 perfect, 1 good", "1 perfect, 2 good", "2 perfect, 1 good", "3 perfect", "4 perfecct","6 perfect"));
-        cleavageScoring = new ArrayList<>(Arrays.asList(-1,0,1,2,3,4,6,9,10,13,16,23,30,40,60));
+        cleavageTypes = new ArrayList<>(Arrays.asList("none", "noor/none", "1 poor", "2 poor", "1 good", "1 good, 1 poor", "2 good", "3 good", "1 perfect", "1 perfect, 1 good", "1 perfect, 2 good", "2 perfect, 1 good", "3 perfect", "4 perfecct", "6 perfect"));
+        cleavageScoring = new ArrayList<>(Arrays.asList(-1, 0, 1, 2, 3, 4, 6, 9, 10, 13, 16, 23, 30, 40, 60));
         abundanceTypes = new ArrayList<>(Arrays.asList("ultratrace", "trace", "low", "moderate", "high", "very high"));
         economicTypes = new ArrayList<>(Arrays.asList("trivial", "low", "moderate", "high", "very high", "I'm rich!"));
 
         for (int i = 1; i < 7; i++) {
             abundanceEconomicScoring.add(i);
         }
-        System.out.println(abundanceEconomicScoring.toString());
-        System.out.println(cleavageScoring);
-        System.out.println(cleavageTypes);
-        System.out.println(abundanceTypes);
-        System.out.println(economicTypes);
-    }
-
-
-    public void buildDeck() {
-        deck.buildDeck();
     }
 
     public void assignPositions(int playerCount) {
@@ -61,7 +51,6 @@ public class SuperTrump {
         }
 
         skipLIMIT = playerCount - 1;
-//        System.out.printf(Arrays.toString(abundanceEconomicScoring) + " " + Arrays.toString(cleavageScoring) + " " + Arrays.toString(cleavageTypes));
     }
 
     public void dealCards() {
@@ -125,13 +114,10 @@ public class SuperTrump {
                             break;
                         }
                         default: {
-                            if (checkCard(playerID, number)){
+                            if (checkCard(playerID, number)) {
                                 table.addCard(players[playerID].playCard(number));
                                 break;
                             }
-
-
-//                            break;
 ////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
 ////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
                         }
@@ -198,10 +184,8 @@ public class SuperTrump {
                     tableScore = cleavageScoring.get(tableIndex);
                     System.out.println("The table cards score is: " + tableScore);
 
-//                return score > tableScore;
-                break;
+                    break;
                 }
-
                 case "crustal abundance": {
                     String rankingCard = this.players[playerID].getOneCard(index).getCrustal_abundance();
                     String tableCard = this.table.cardInPlay().getCrustal_abundance();
@@ -213,10 +197,8 @@ public class SuperTrump {
                     int tableIndex = cleavageTypes.indexOf(tableCard);
                     tableScore = abundanceEconomicScoring.get(tableIndex);
                     System.out.println("The table cards score is: " + tableScore);
-//                return score > tableScore;
-                break;
+                    break;
                 }
-
                 case "economic value": {
                     String rankingCard = this.players[playerID].getOneCard(index).getEconomic_value();
                     String tableCard = this.table.cardInPlay().getEconomic_value();
@@ -228,18 +210,13 @@ public class SuperTrump {
                     int tableIndex = cleavageTypes.indexOf(tableCard);
                     tableScore = abundanceEconomicScoring.get(tableIndex);
                     System.out.println("The table cards score is: " + tableScore);
-//                return score > tableScore;
-                break;
-
+                    break;
                 }
             }
             return score > tableScore;
-
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return true;
         }
-
     }
 }
 //// TODO: 3/10/16 Skip function. try making a variable that counts skips/draws. And then make a limimt variable which is just LIMIT_SKIPS = playercount - 1.

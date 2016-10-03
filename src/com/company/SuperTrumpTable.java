@@ -11,32 +11,28 @@ public class SuperTrumpTable {
     private ArrayList<SuperTrumpCard> table;
     private String trump;
 
-    protected SuperTrumpTable(){
+    protected SuperTrumpTable() {
         table = new ArrayList<>();
     }
 
     public void addCard(SuperTrumpCard tableCard) {
         table.add(tableCard);
-//        System.out.println("table cards: " + table);
-
-//        return null;
     }
 
-    public void setTrump(String trump){
+    public void setTrump(String trump) {
         this.trump = trump;
     }
 
-    public String getTrump(){
+    public String getTrump() {
         return trump;
     }
 
 
-    public ArrayList<SuperTrumpCard> getTableCards(){
+    public ArrayList<SuperTrumpCard> getTableCards() {
         return table;
     }
 
     public SuperTrumpCard cardInPlay() {
-//        Element cardToShow = table.size() - 1;
         switch (table.size()) {
             case 0: {
                 return null;
