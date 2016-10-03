@@ -27,7 +27,6 @@ public class SuperTrumpTable {
         return trump;
     }
 
-
     public ArrayList<SuperTrumpCard> getTableCards() {
         return table;
     }
