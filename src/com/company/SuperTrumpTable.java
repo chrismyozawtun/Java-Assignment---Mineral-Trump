@@ -21,6 +21,10 @@ public class SuperTrumpTable {
 //        return null;
     }
 
+    public ArrayList<SuperTrumpCard> getTableCards(){
+        return table;
+    }
+
     public SuperTrumpCard cardInPlay() {
 //        Element cardToShow = table.size() - 1;
         switch (table.size()) {

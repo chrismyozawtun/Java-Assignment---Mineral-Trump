@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.SuperTrump;
-
 import java.util.ArrayList;
 
 /**
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 public class SuperTrumpPlayers {
     private int playerCount;
     private int position;
-    private int dealerPosition = 1;
+//    private int dealerPosition = 1;
     private int id;
     private ArrayList<SuperTrumpCard> cards;
     private boolean skipTurn = false;
@@ -70,7 +68,7 @@ public class SuperTrumpPlayers {
 
     public SuperTrumpCard playCard(int index){
         SuperTrumpCard removedCard;
-        System.out.printf("The card is: " + cards.get(index).getTittle());
+        System.out.printf("The card is: " + cards.get(index).getID());
         removedCard = cards.remove(index);
         return removedCard;
     }

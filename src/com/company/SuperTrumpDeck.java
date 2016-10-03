@@ -24,7 +24,7 @@ public class SuperTrumpDeck {
         cards = new ArrayList<>();
 
         for (int i = 0; i < INITIAL_NUM_CARDS; i++) {
-            cards.add(new SuperTrumpCard(i));
+            cards.add(new SuperTrumpCard(i, "Slide01.jpg","Slide01","play","Quartz","SiO_2","tectosilicate","hexagonal",7,2.65,"poor/none","high","moderate","igneous, metamorphic, sedimentary"));
             //google how to create random array of integers. Non repeating integers
         }
     }
@@ -34,29 +34,7 @@ public class SuperTrumpDeck {
     }
 
     public void buildDeck() {
-//
-//        try {
-//            File cardsMaster = new File("project_mineral_super_trumps_game-master/CardsXml.xml");
-//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-//            Document doc = dBuilder.parse(cardsMaster);
-//
-//            doc.getDocumentElement().normalize();
-//
-//            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-//            NodeList nList = doc.getElementsByTagName("cards");
-//            System.out.println("----------------------------");
-//
-//            for (int temp = 0; temp < nList.getLength(); temp++) {
-//                Node nNode = nList.item(temp);
-//                System.out.println("\nCurrent Element :" + nNode.getNodeName());
-//                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//                }
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }}
+
     }
 
     public SuperTrumpCard getOneCard(){
@@ -73,6 +51,12 @@ public class SuperTrumpDeck {
             retn.add(card);
         }
         return retn;
+    }
+
+    public void shuffleInTableCards(ArrayList<SuperTrumpCard> tableCards) {
+        for (int i = 0; i < tableCards.size(); i++) {
+            cards.add(tableCards.get(i));
+        }
     }
 }
 

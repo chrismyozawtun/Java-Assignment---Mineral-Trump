@@ -1,9 +1,6 @@
 package com.company;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import static sun.audio.AudioPlayer.player;
 
 public class SuperTrump {
     private int playerCount;
@@ -81,17 +78,18 @@ public class SuperTrump {
         ArrayList<Integer> playOrder = new ArrayList<>();
         for (int i = 1; i < playerCount + 1; i++) {
             playOrder.add(i);
-//                                                    System.out.println("play order = " + i);
         }
-
+//                                                    System.out.println("play order = " + i);
         System.out.println("\nLeft of the dealer (Position 2) goes first.");
+
 //        // TODO: 3/10/16 Do a giant try and catch exception? for when someone looses all their cards. Catch that error and playgame is false?
+
         while (playGame) {
 //            if (!players[playerID].getSkip()) { // TODO: 3/10/16 DO the skip function in ful so it works
             if (players[playerID].getPosition() == positionsToPlay) {
-                int number;
-                Scanner input = new Scanner(System.in);
                 if (players[humanPlayerID].getPosition() == players[playerID].getPosition()) {
+                    int number;
+                    Scanner input = new Scanner(System.in);
                     System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
                     players[playerID].printCardsforPlay();
                     System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
@@ -138,6 +136,11 @@ public class SuperTrump {
                 System.out.println("The card in play is " + table.cardInPlay());
                 System.out.println("Number of skips is: " + numberOfSkips + " and the skip limit is: " + skipLIMIT);
                 System.out.println("The deck has " + deck.getCards().size() + " cards left");
+            }
+
+            if (deck.getCards().size() == 1){
+                deck.shuffleInTableCards(table.getTableCards());
+                System.out.println("The table cards have been shuffled back into the deck");
             }
 
             if (positionsToPlay > playerCount) {
