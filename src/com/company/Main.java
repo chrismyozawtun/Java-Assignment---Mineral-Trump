@@ -12,8 +12,9 @@ public class Main {
             switch (userOption) {
                 case 1: {
                     int numPlayers = getInt("How many players are playing");
-                    while (numPlayers > 10 || numPlayers == 0) {
-                        numPlayers = getInt("How many players are playing. (Max 10)");
+                    while (numPlayers > 7 || numPlayers == 0) {
+                        numPlayers = getInt("How many players are playing. (Max 7)");
+//                        // TODO: 3/10/16 if many players, need to reshuffle cards into de
                     }
                     menuScreen = false;
                     startNewGame(numPlayers);

@@ -29,6 +29,10 @@ public class SuperTrumpDeck {
         }
     }
 
+    public ArrayList getCards(){
+        return cards;
+    }
+
     public void buildDeck() {
 //
 //        try {
