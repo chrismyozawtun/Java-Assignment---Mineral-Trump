@@ -62,13 +62,13 @@ public class SuperTrumpPlayers {
     public void printCardsforPlay(){
         System.out.println("You are position " + position + " and ID is " + id + "\nYour hand is: ");
         for (int i = 0; i < cards.size() ; i++) {
-            System.out.println("#" + i + " = " + String.valueOf(cards.get(i)));
+            System.out.println("#" + i + " = " + String.valueOf(cards.get(i)) + "   Hardness: " + cards.get(i).getHardness() + " Specific gravity: " + cards.get(i).getSpecifc_gravity() + " Cleavage: " + cards.get(i).getCleavage() + " Crustal Abundance: " + cards.get(i).getCrustal_abundance() + " Economic value: " + cards.get(i).getEconomic_value());
         }
     }
 
     public SuperTrumpCard playCard(int index){
         SuperTrumpCard removedCard;
-        System.out.printf("The card is: " + cards.get(index).getID());
+        System.out.println("The card is: " + cards.get(index).gettittle());
         removedCard = cards.remove(index);
         return removedCard;
     }

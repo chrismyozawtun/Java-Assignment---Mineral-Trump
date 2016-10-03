@@ -16,7 +16,7 @@ public class SuperTrumpTable {
 
     public void addCard(SuperTrumpCard tableCard) {
         table.add(tableCard);
-        System.out.println("table cards: " + table);
+//        System.out.println("table cards: " + table);
 
 //        return null;
     }
