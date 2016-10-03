@@ -70,6 +70,7 @@ public class SuperTrumpPlayers {
 
     public SuperTrumpCard playCard(int index){
         SuperTrumpCard removedCard;
+        System.out.printf("The card is: " + cards.get(index).getTittle());
         removedCard = cards.remove(index);
         return removedCard;
     }

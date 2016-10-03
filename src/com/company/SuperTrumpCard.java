@@ -9,10 +9,16 @@ import java.util.StringJoiner;
 public class SuperTrumpCard {
 
     private int id;
+    public String tittle;
+
 
 
     public SuperTrumpCard(int id){
         this.id = id;
+    }
+
+    public String getTittle(){
+        return tittle;
     }
 
     public int getID(){

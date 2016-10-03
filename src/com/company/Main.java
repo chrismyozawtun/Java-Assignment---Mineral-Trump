@@ -54,7 +54,6 @@ public class Main {
     }
 
     private static void showHumanPlayer(int humanPlayer){
-//        if(humanPlayer == ) // TODO: 1/10/16 See if the human is a dealer or not
         if (humanPlayer == 1){
             System.out.println("You are in position " + humanPlayer + " and you are also the dealer.");
         }
