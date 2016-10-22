@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Main {
+public class MainSuperTrump {
 
     public static void main(String[] args) {
         boolean menuScreen = true;
@@ -77,7 +77,7 @@ public class Main {
         game.assignPositions(playerCount);
         game.dealCards();
         game.selectHumanPlayer();
-        int humanPlayer = game.getHumanPlayer();
+        int humanPlayer = game.getHumanPlayerPosition();
         showHumanPlayer(humanPlayer);
 
         game.gamePlay();
