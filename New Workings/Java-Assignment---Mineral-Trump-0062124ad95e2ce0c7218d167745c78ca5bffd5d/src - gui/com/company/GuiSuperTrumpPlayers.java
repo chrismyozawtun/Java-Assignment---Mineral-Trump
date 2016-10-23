@@ -26,7 +26,7 @@ public class GuiSuperTrumpPlayers extends JPanel{
 
         for (int i = 0; i < cards.size(); i++) {
             SuperTrumpCard card = cards.get(i);
-            GuiSuperTrumpCard cardview = new GuiSuperTrumpCard(card);
+            GuiSuperTrumpCard cardview = new GuiSuperTrumpCard(i, card, human);
             System.out.println(card);
             add(cardview);
             repaint();

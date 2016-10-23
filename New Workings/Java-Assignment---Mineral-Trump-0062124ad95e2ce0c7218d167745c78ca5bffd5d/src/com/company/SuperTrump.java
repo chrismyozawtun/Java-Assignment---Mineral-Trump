@@ -74,12 +74,8 @@ public class SuperTrump {
         return humanPlayerID;
     }
 
-    public int getHumanPlayerPosition() {
+    public int getHumanPlayer() {
         return players[humanPlayerID].getPosition();
-    }
-
-    public SuperTrumpPlayers getHumanPlayer(){
-        return players[humanPlayerID];
     }
 
     public void gamePlay() {
@@ -87,13 +83,12 @@ public class SuperTrump {
         int positionsToPlay = 2;
         int playerID = 0;
         int playerlistLimit = playerCount - 1;
-        int randomCardAI;
 
         ArrayList<Integer> playOrder = new ArrayList<>();
         for (int i = 1; i < playerCount + 1; i++) {
             playOrder.add(i);
         }
-//                                                    System.out.println("play order = " + i);
+
         System.out.println("\nLeft of the dealer (Position 2) goes first.");
 
 //        // TODO: 3/10/16 Do a giant try and catch exception? for when someone looses all their cards. Catch that error and playgame is false?
@@ -103,57 +98,12 @@ public class SuperTrump {
 //            if (!players[playerID].getSkip()) { // TODO: 3/10/16 DO the skip function in ful so it works
             if (players[playerID].getPosition() == positionsToPlay) {
                 if (players[humanPlayerID].getPosition() == players[playerID].getPosition()) {
-//                    playerTurn(playerID);
-
-                    int number;
-                    Scanner input = new Scanner(System.in);
-                    System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-                    players[playerID].printCardsforPlay();
-                    System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
-                    number = input.nextInt();
-
-//                        // TODO: 3/10/16 Need to do checking on what player can enter
-                    switch (number) {
-                        case 40: {
-                            players[playerID].drawCard(deck.getOneCard());
-                            numberOfSkips++;
-                            break;
-                        }
-                        default: {
-                            if (checkCard(playerID, number)) {
-                                table.addCard(players[playerID].playCard(number));
-                                break;
-                            }
-////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
-////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
-                        }
-                    }
-
+                    humanTurnToPlay(playerID);
                 } else {
-                    System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-//// TODO: 4/10/16 check all the cards in the hand
-                    for (int i = 0; i < players[playerID].getCards().size(); i++) {
-                        try {
-                            if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
-                                table.addCard(players[playerID].playCard(i));
-                                break;
-                            } else {
-                                players[playerID].drawCard(deck.getOneCard());
-                                numberOfSkips++;
-                            }
-                            break;
-                        } catch (NullPointerException e) {
-//                                This is if there is no card in play at the moment
-                            randomCardAI = new Random().nextInt(players[playerID].getCards().size());
-                            System.out.println("Player " + players[playerID].getPosition() + " played card " + players[playerID].getCards().get(randomCardAI));
-                            table.addCard(players[playerID].playCard(randomCardAI));
-//                            System.out.println("There is no card in play\n");
-                            break;
-                        }
-                    }
+                    computerTurnToPlay(playerID);
                 }
                 positionsToPlay++;
-                System.out.println("The card in play is " + table.cardInPlay());
+                System.out.println("The card in play is " + table.cardInPlay() + " and its score is " + table.cardInPlay().getID());
                 System.out.println("Number of skips is: " + numberOfSkips + " and the skip limit is: " + skipLIMIT);
                 System.out.println("The deck has " + deck.getCards().size() + " cards left");
             }
@@ -161,6 +111,7 @@ public class SuperTrump {
             if (deck.getCards().size() == 1) {
                 deck.shuffleInTableCards(table.getTableCards());
                 System.out.println("The table cards have been shuffled back into the deck");
+
             }
 
             if (positionsToPlay > playerCount) {
@@ -174,31 +125,58 @@ public class SuperTrump {
         }
     }
 
-//    private void playerTurn(int playerID) {
-//        int number;
-//        Scanner input = new Scanner(System.in);
-//        System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-//        players[playerID].printCardsforPlay();
-//        System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
-//        number = input.nextInt();
-//
-////                        // TODO: 3/10/16 Need to do checking on what player can enter
-//        switch (number) {
-//            case 40: {
-//                players[playerID].drawCard(deck.getOneCard());
-//                numberOfSkips++;
+    private void computerTurnToPlay(int playerID) {
+        int randomCardAI;
+        boolean drawCard = true;
+
+        System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+        players[playerID].printCardsforPlay();
+        try {
+            for (int i = 0; i < players[playerID].getCards().size(); i++) {
+            if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {
+                table.addCard(players[playerID].playCard(i));
+                drawCard = false;
+                break;
+            }
+        }
+            if (drawCard){
+                players[playerID].drawCard(deck.getOneCard());
+                numberOfSkips++;
+            }
+        } catch (NullPointerException e) {
+//                                This is if there is no card in play at the moment
+            randomCardAI = new Random().nextInt(players[playerID].getCards().size());
+            System.out.println("Player " + players[playerID].getPosition() + " played card RANDOM " + players[playerID].getCards().get(randomCardAI));
+            table.addCard(players[playerID].playCard(randomCardAI));
 //                break;
-//            }
-//            default: {
-//                if (checkCard(playerID, number)) {
-//                    table.addCard(players[playerID].playCard(number));
-//                    break;
-//                }
-//////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
-//////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
-//            }
-//        }
-//    }
+        }
+    }
+
+    private void humanTurnToPlay(int playerID) {
+        int number;
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
+        players[playerID].printCardsforPlay();
+        System.out.println("enter a card you wanna eat OR '40' to skip turn and draw");
+        number = input.nextInt();
+
+//                        // TODO: 3/10/16 Need to do checking on what player can enter
+        switch (number) {
+            case 40: {
+                players[playerID].drawCard(deck.getOneCard());
+                numberOfSkips++;
+                break;
+            }
+            default: {
+//                            if (checkCard(playerID, number)) {
+                table.addCard(players[playerID].playCard(number));
+                break;
+//                            }
+////                        // TODO: 3/10/16 Show name of card, have player select trump and show that trump. Same for AI
+////                        // TODO: 3/10/16 Check if the card played is higher than the card previous in trump
+            }
+        }
+    }
 
     private boolean checkCard(int playerID, int index) {
         try {
@@ -250,9 +228,10 @@ public class SuperTrump {
         } catch (NullPointerException e) {
             return true;
         }
-//        catch (ArrayIndexOutOfBoundsException){
-//            return true;
-//        }
+        catch (ArrayIndexOutOfBoundsException e){
+            return true;
+        }
+
     }
 }
 //// TODO: 3/10/16 Skip function. try making a variable that counts skips/draws. And then make a limimt variable which is just LIMIT_SKIPS = playercount - 1.
@@ -262,4 +241,3 @@ public class SuperTrump {
 
 //todo: do a loop so all the players Skip boolean is taken back to false and they can play again??
 
-////             TODO: 3/10/16 Need to random int or something to see if the Ai will draw a card maybs ?

@@ -10,37 +10,37 @@ import java.awt.event.MouseEvent;
 public class GuiSuperTrumpCard extends JPanel {
 
     SuperTrumpCard card;
-
+    SuperTrumpPlayers human;
+    int id;
     JLabel cardName;
 
 
-    public GuiSuperTrumpCard(SuperTrumpCard card) {
+    public GuiSuperTrumpCard(int id, SuperTrumpCard card, SuperTrumpPlayers human) {
         this.card = card;
+        this.id = id;
+        this.human = human;
 
         cardName = new JLabel(card.gettittle());
-
-        add(cardName);
 
         addMouseListener(new MouseInputAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
                 cardName.setText("I cliced");
-//                human
-
-//                        // TODO: 23/10/16 last 5 minutes of screencast p1
                 playCard();
                 super.mouseClicked(e);
             }
-
-
         });
-
+        add(cardName);
     }
 
     private int playCard() {
-        System.out.println("the card played was " + card.gettittle());
+        System.out.println("the card played was " + card.gettittle() + " and its id was " + card.getID() + " and its index was " + id);
         return card.getID();
+    }
+
+    public int getInput(){
+        return id;
     }
 
 
