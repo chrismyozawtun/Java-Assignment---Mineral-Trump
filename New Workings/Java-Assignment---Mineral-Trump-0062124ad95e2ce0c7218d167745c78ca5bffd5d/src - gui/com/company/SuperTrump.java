@@ -3,14 +3,14 @@ package com.company;
 import java.util.*;
 
 public class SuperTrump {
-    private int playerCount;
+    protected int playerCount;
     private static final int DEAL_AMOUNT = 8;
-    private SuperTrumpPlayers[] players;
-    private SuperTrumpDeck deck;
-    private SuperTrumpTable table;
-    private int humanPlayerID;
-    private int skipLIMIT;
-    private int numberOfSkips;
+    protected SuperTrumpPlayers[] players;
+    protected SuperTrumpDeck deck;
+    protected SuperTrumpTable table;
+    protected int humanPlayerID;
+    protected int skipLIMIT;
+    protected int numberOfSkips;
     int playerID = 0;
     private ArrayList<Integer> abundanceEconomicScoring;
     private ArrayList<String> abundanceTypes;
@@ -93,10 +93,9 @@ public class SuperTrump {
         for (int i = 1; i < playerCount + 1; i++) {
             playOrder.add(i);
         }
-
         System.out.println("\nLeft of the dealer (Position 2) goes first.");
-
-//        // TODO: 3/10/16 Do a giant try and catch exception? for when someone looses all their cards. Catch that error and playgame is false?
+        // TODO: 3/10/16 Do a giant try and catch exception? for w
+// hen someone looses all their cards. Catch that error and playgame is false?
 
         while (playGame) {
             table.setTrump("cleavage");
@@ -135,7 +134,7 @@ public class SuperTrump {
         boolean drawCard = true;
 
         System.out.println("\nposition = " + players[playerID].getPosition() + " id = " + players[playerID].getId());
-        players[playerID].printCardsforPlay();
+//        players[playerID].printCardsforPlay();
         try {
             for (int i = 0; i < players[playerID].getCards().size(); i++) {
             if (players[playerID].getOneCard(i).getID() > table.cardInPlay().getID()) {

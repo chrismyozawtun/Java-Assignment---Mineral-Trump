@@ -9,8 +9,9 @@ import java.util.ArrayList;
 public class GuiSuperTrumpPlayers extends JPanel{
 
     SuperTrumpPlayers human;
+    GuiSuperTrumpCard cardview;
 //    JLabel playername = new JLabel("Humans position is " + String.valueOf(human.getId()));
-    JLabel playername = new JLabel("Random label");
+    JLabel playername = new JLabel("Your \n Hand");
 
     public GuiSuperTrumpPlayers(SuperTrumpPlayers human) {
         this.human = human;
@@ -26,11 +27,15 @@ public class GuiSuperTrumpPlayers extends JPanel{
 
         for (int i = 0; i < cards.size(); i++) {
             SuperTrumpCard card = cards.get(i);
-            GuiSuperTrumpCard cardview = new GuiSuperTrumpCard(i, card, human);
+            cardview = new GuiSuperTrumpCard(i, card, human);
             System.out.println(card);
             add(cardview);
             repaint();
         }
 
+    }
+
+    public int getcardInput(){
+        return cardview.getInput();
     }
 }

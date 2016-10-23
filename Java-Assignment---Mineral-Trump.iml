@@ -3,9 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/WorkingGame" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Working Game" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/New Workings/Java-Assignment---Mineral-Trump-0062124ad95e2ce0c7218d167745c78ca5bffd5d/src - gui" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
