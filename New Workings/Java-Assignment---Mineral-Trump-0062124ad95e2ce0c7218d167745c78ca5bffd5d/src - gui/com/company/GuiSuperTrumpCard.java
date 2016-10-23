@@ -4,7 +4,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -39,31 +38,21 @@ public class GuiSuperTrumpCard extends JPanel {
         add(cardView);
     }
 
-    public void actionPerformed(ActionEvent e)
-    {
 
-    }
 
-    class myMouse extends MouseInputAdapter{
-        public void mouseClicked(MouseEvent e) {
+    class myMouse extends MouseInputAdapter {
+        public final void mouseClicked(MouseEvent e) {
             cardView.setText("I cliced");
             human.playCard(id);
-
-            if (cardView != null){
+            if (cardView != null) {
                 remove(cardView);
             }
-
-
-
-
-
-
             repaint();
             super.mouseClicked(e);
         }
-
-
     }
+
+
 
     public int playCard() {
         System.out.println("the card played was " + card.gettittle() + " and its id was " + card.getID() + " and its index was " + id);
@@ -71,9 +60,9 @@ public class GuiSuperTrumpCard extends JPanel {
     }
 
     public int getInput(){
-
         return id;
     }
-
-
 }
+
+
+

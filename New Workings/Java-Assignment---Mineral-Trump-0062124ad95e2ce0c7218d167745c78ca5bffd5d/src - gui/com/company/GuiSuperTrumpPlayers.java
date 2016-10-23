@@ -36,6 +36,6 @@ public class GuiSuperTrumpPlayers extends JPanel{
     }
 
     public int getcardInput(){
-        return cardview.getInput();
+        return cardview.playCard();
     }
 }
