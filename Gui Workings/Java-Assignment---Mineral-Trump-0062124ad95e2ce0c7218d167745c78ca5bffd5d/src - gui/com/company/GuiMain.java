@@ -16,7 +16,9 @@ public class GuiMain extends JFrame {
 
     JLabel question = new JLabel("How many players?: ");
     Font bigfont = new Font("Arial", Font.BOLD, 16);
-    JTextField answer = new JTextField(10);
+//    JTextField answer = new JTextField(10);
+    SpinnerNumberModel spinnerAnswer = new SpinnerNumberModel(4,3,7,1);
+    JSpinner answer = new JSpinner(spinnerAnswer);
     JButton pressme = new JButton("New Game");
     JLabel playerInfo = new JLabel("");
     JLabel humanPlayertext = new JLabel("");
@@ -42,6 +44,7 @@ public class GuiMain extends JFrame {
 
         JPanel panel1 = new JPanel();
         panel1.add(question, BorderLayout.NORTH);
+
         panel1.add(answer, BorderLayout.CENTER);
         panel1.add(playerInfo, BorderLayout.SOUTH);
         add(panel1, BorderLayout.NORTH);
@@ -51,7 +54,7 @@ public class GuiMain extends JFrame {
 
         pressme.addActionListener(e -> {
             repaint();
-            int numberOfPlayer = Integer.parseInt(answer.getText());
+            int numberOfPlayer = (int) answer.getValue();
 
             System.out.println("You clicked new game");
             System.out.println("you entered " + numberOfPlayer );

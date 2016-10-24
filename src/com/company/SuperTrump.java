@@ -218,6 +218,8 @@ public class SuperTrump {
             return true;
         }
     }
+
+
 }
 //// TODO: 3/10/16 Skip function. try making a variable that counts skips/draws. And then make a limimt variable which is just LIMIT_SKIPS = playercount - 1.
 // todo: The first variable will increase everyime the draw function is called and then every loop of the game; the draw function is check with the limit and if the limit is reached,

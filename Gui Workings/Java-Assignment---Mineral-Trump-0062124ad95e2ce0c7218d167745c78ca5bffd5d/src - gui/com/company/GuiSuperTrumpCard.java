@@ -24,6 +24,7 @@ public class GuiSuperTrumpCard extends JPanel {
         this.human = human;
 
         cardView = new JLabel(card.gettittle());
+
         cardView.setPreferredSize(new Dimension(175, 250));
         try {
             Image buttomImage = ImageIO.read(getClass().getResource(card.getFileName()));
